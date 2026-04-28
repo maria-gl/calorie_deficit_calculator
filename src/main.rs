@@ -36,7 +36,7 @@ fn main() {
     io::stdin().read_line(&mut height).expect("failed to read line");
     let height: f32 = height.trim().parse().expect("please type a number");
 
-    if sex == 'm' || sex == 'F'{
+    if sex == 'm' || sex == 'M'{
         let bmr: f32 = 9.99 * weight + 6.25 * height - 4.92 * age + 5.0;
     }
     else {
