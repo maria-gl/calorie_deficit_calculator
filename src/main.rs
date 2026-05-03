@@ -10,6 +10,13 @@ enum Sex {
 fn main() {
     println!("          CALORIE CALCULATOR");
 
+   let bmr: f32 = calculate_bmr();
+   calculate_clories(bmr);
+    
+}
+
+fn calculate_bmr() -> f32
+{
     println!("Please, enter the following data to calculate your BMR");
 
     println!("Sex (m/f): ");
@@ -52,6 +59,32 @@ fn main() {
         bmr = 9.99 * weight + 6.25 * height - 4.92 * age - 161.0;
     }
 
-    println!("Your BMR is: {bmr}")
-    
+    println!("Your BMR is: {bmr}");
+    return bmr;
+}
+
+fn calculate_clories(bmr: f32)
+{
+    println!("Activity level (1-6): ");
+    let mut activity = String::new();
+    io::stdin().read_line(&mut activity).expect("failed to read line");
+    let activity: i32 = activity.trim().parse().expect("please type a number 1-6");
+
+    let activity_multiplier : f32;
+
+    match activity {
+        1 => activity_multiplier = 1.2,
+        2 => activity_multiplier = 1.4,
+        3 => activity_multiplier = 1.6,
+        4 => activity_multiplier = 1.75,
+        5 => activity_multiplier = 2.0,
+        6 => activity_multiplier = 2.4,
+        _ => {
+            println!("please type a number 1-6");
+            exit(1);
+        }
+    }
+
+    let calories : f32 = bmr * activity_multiplier;
+    println!("Your calorie deficit is {} calories", calories);
 }
